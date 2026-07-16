@@ -6,7 +6,7 @@
     "type": "offline"
   },
   "server": {
-    "ip": "7sBdany.aternos.me:56428",
+    "ip": "7sBdany.aternos.me",
     "port": 56428,
     "version": "",
     "try-creative": false
