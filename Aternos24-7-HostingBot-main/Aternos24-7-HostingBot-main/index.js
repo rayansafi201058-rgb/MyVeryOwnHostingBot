@@ -612,6 +612,7 @@ function initializeModules(bot, mcData, defaultMove) {
     const tryAuth = (type) => {
       if (authHandled || !bot || !botState.connected) return;
       authHandled = true;
+
       if (type === 'register') {
         bot.chat(`/register ${password} ${password}`);
         console.log('[Auth] Detected register prompt - sent /register');
@@ -623,13 +624,24 @@ function initializeModules(bot, mcData, defaultMove) {
 
     bot.on('messagestr', (message) => {
       if (authHandled) return;
+
       const msg = message.toLowerCase();
-      if (msg.includes('/register') || msg.includes('register ') || msg.includes('지정된 비밀번호')) {
+
+      if (
+        msg.includes('/register') ||
+        msg.includes('register ') ||
+        msg.includes('지정된 비밀번호')
+      ) {
         tryAuth('register');
-      } else if (msg.includes('/login') || msg.includes('login ') || msg.includes('로그인')) {
+      } else if (
+        msg.includes('/login') ||
+        msg.includes('login ') ||
+        msg.includes('로그인')
+      ) {
         tryAuth('login');
       }
     });
+  }
 
   // ---------- CHAT MESSAGES ----------
   if (config.utils['chat-messages'] && config.utils['chat-messages'].enabled) {
