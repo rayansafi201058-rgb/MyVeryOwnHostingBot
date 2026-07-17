@@ -631,16 +631,6 @@ function initializeModules(bot, mcData, defaultMove) {
       }
     });
 
-    // Failsafe: if no prompt after 10s, try login anyway
-    setTimeout(() => {
-      if (!authHandled && bot && botState.connected) {
-        console.log('[Auth] No prompt detected after 10s, sending /login as failsafe');
-        bot.chat(`/login ${password}`);
-        authHandled = true;
-      }
-    }, 10000);
-  }
-
   // ---------- CHAT MESSAGES ----------
   if (config.utils['chat-messages'] && config.utils['chat-messages'].enabled) {
     const messages = config.utils['chat-messages'].messages;
