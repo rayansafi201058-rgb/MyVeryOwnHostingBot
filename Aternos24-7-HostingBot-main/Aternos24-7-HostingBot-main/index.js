@@ -621,15 +621,24 @@ function initializeModules(bot, mcData, defaultMove) {
       }
     };
 
-    bot.on('messagestr', (message) => {
-      if (authHandled) return;
-      const msg = message.toLowerCase();
-      if (msg.includes('/register') || msg.includes('register ') || msg.includes('지정된 비밀번호')) {
-        tryAuth('register');
-      } else if (msg.includes('/login') || msg.includes('login ') || msg.includes('로그인')) {
-        tryAuth('login');
-      }
-    });
+bot.on('messagestr', (message) => {
+  const msg = message.toLowerCase();
+
+  if (
+    msg.includes('please register') ||
+    msg.includes('/register') ||
+    msg.includes('register ')
+  ) {
+    tryAuth('register');
+  } 
+  else if (
+    msg.includes('please login') ||
+    msg.includes('/login') ||
+    msg.includes('login ')
+  ) {
+    tryAuth('login');
+  }
+});
 
     // Failsafe: if no prompt after 10s, try login anyway
     setTimeout(() => {
